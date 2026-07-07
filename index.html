@@ -159,8 +159,7 @@
 
     <div class="teaser">
       <figure>
-        <div class="ph wide">TEASER IMAGE<br>a wide, appetising shot of the Gradio interface returning
-          images for a query (e.g. "paella"), or a grid of your best corpus photos.<br>replace with: teaser.jpg</div>
+        <img src="teaser.jpg.png" alt="Vista de interfaz Gradio / Teaser del proyecto" style="width: 100%; border-radius: 3px; border: 1px solid #e2e2e2; aspect-ratio: 16/8; object-fit: cover;">
         <figcaption>The Critic answering a query over my personal food archive. Retrieval by image, by caption, and by a weighted fusion of both.</figcaption>
       </figure>
     </div>
@@ -186,8 +185,8 @@
         <p>Text to image retrieval, finding a picture from a written query, is now a common feature, but its behaviour is easy to take for granted and hard to inspect. This project builds such a system from open components and treats its mistakes as the object of study: not only what the pipeline retrieves well, but what it retrieves wrongly, and why. A personal curiosity about how the search box in a phone photo gallery might work was part of the initial pull, but the project is framed around the retrieval behaviour itself rather than around reverse engineering any product.</p>
         <p>Answering that requires a corpus whose contents are fully known, so that each result can be checked without ambiguity. My own archive of food photographs, collected over about six years, serves that role: because I recognise every dish and setting, I can identify precisely when the system retrieves something incorrect. The personal collection is the test instrument, not the subject of the project.</p>
       </div>
-      <div>
-        <div class="ph tall">PORTRAIT IMAGE<br>one evocative photo from the corpus<br>(a dish that means home to you)<br>replace with: motivation.jpg</div>
+      <div style="padding-left: 20px;">
+        <img src="motivation.jpg" alt="Foto evocadora de comida" style="width: 100%; height: auto; border-radius: 3px; border: 1px solid #e2e2e2; aspect-ratio: 3/4; object-fit: cover;">
       </div>
     </div>
   </div>
@@ -211,14 +210,14 @@
       <p>All images are my own or were shared with me privately for personal use, and I have the right to publish them. There are no identifiable third parties in the set, so the full corpus can be shared publicly.</p>
     </div>
     <div class="gallery" style="margin-top:26px;">
-      <div class="ph sq">corpus sample 1</div>
-      <div class="ph sq">corpus sample 2</div>
-      <div class="ph sq">corpus sample 3</div>
-      <div class="ph sq">corpus sample 4</div>
-      <div class="ph sq">corpus sample 5</div>
-      <div class="ph sq">corpus sample 6</div>
+      <img src="corpus_sample_1.jpg" alt="Muestra de corpus 1" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+      <img src="corpus_sample_2.jpg" alt="Muestra de corpus 2" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+      <img src="corpus_sample_3.jpg" alt="Muestra de corpus 3" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+      <img src="corpus_sample_4.jpg" alt="Muestra de corpus 4" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+      <img src="corpus_sample_5.jpg" alt="Muestra de corpus 5" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+      <img src="corpus_sample_6.jpg" alt="Muestra de corpus 6" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
     </div>
-    <figcaption>A representative sample of the corpus. Replace each block with an image; the full set is available in the repository.</figcaption>
+    <figcaption>A representative sample of the corpus. The full set is available in the repository.</figcaption>
   </div>
 </section>
 
@@ -379,7 +378,10 @@
         </tbody>
       </table>
     </div>
-    <div class="ph wide" style="margin-top:8px;">OPTIONAL CHART<br>a line plot of hybrid precision@3 vs alpha (peak at 0.7)<br>replace with: alpha_sweep.png, or delete this block</div>
+    
+    <div style="margin-top:20px;">
+      <img src="alpha_sweep.png" alt="Gráfica Alpha Sweep" style="width: 100%; border-radius: 3px; border: 1px solid #e2e2e2;">
+    </div>
 
     <h3>Model comparison: CLIP vs SigLIP2</h3>
     <p class="measure">A follow-up experiment, driven by the crowded-embedding finding below, swaps the encoder for a newer one, <code>google/siglip2-base-patch16-224</code> (2025), and re-scores both retrieval routes on the same gold set. The result is not a clean win but a trade-off: SigLIP2 is a much stronger image encoder, yet a weaker text encoder for these long captions.</p>
@@ -394,7 +396,10 @@
       </table>
     </div>
     <p class="measure">Two things follow. First, the visual gap (0.576 vs 0.394) shows how much a newer encoder improves image side retrieval on this corpus. Second, and more revealing, SigLIP2 does <i>not</i> fix the caption route; it makes it worse. That supports the diagnosis that the caption route's weakness is not specific to CLIP but structural to this family: a short text budget over a homogeneous corpus crowds the descriptions together regardless of which encoder reads them. For that reason the shipped system keeps CLIP for a coherent single model pipeline, and treats the swap as a measured comparison rather than a drop in replacement.</p>
-    <div class="ph wide" style="margin-top:8px;">CHART<br>grouped bar chart, CLIP vs SigLIP2 across the two routes<br>replace with: model_comparison.png (generated by the notebook)</div>
+    
+    <div style="margin-top:20px;">
+      <img src="model_comparison.png" alt="Gráfica de comparación de modelos" style="width: 100%; border-radius: 3px; border: 1px solid #e2e2e2;">
+    </div>
   </div>
 </section>
 
@@ -410,13 +415,17 @@
     <div class="versus">
       <div>
         <h4>Query: "cat"</h4>
-        <div class="ph sq" style="min-height:200px;">image: the cat on the television<br>replace with: cat_tv.jpg</div>
+        <div style="padding-bottom: 10px;">
+            <img src="cat_tv.jpg" alt="Foto de un gato" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+        </div>
         <p class="verdict win">CLIP 0.67 &nbsp;vs&nbsp; caption 0.00</p>
         <p style="font-size:16px;margin:0;">The caption route retrieves neither cat, even though Gemma clearly saw one: its caption opens "Cat, Television, Wall, Interior". The visual route finds both cats easily.</p>
       </div>
       <div>
         <h4>Query: "octopus"</h4>
-        <div class="ph sq" style="min-height:200px;">image: takoyaki (octopus is inside the batter, not visible)<br>replace with: octopus.jpg</div>
+        <div style="padding-bottom: 10px;">
+            <img src="octopus.jpg" alt="Foto de Takoyaki" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+        </div>
         <p class="verdict win">caption 0.33 &nbsp;vs&nbsp; CLIP 0.00</p>
         <p style="font-size:16px;margin:0;">The mirror case. The visual route finds nothing: the one octopus image is takoyaki, where the octopus is hidden inside the batter and never visible. The caption route still retrieves it, because Gemma names the octopus in the description from culinary knowledge rather than from what the pixels show. Here language succeeds where vision cannot, precisely because the object is not visible.</p>
       </div>
