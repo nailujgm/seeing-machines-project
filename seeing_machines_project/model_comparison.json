@@ -1,0 +1,144 @@
+{
+  "k": 3,
+  "n_queries": 22,
+  "means": {
+    "clip_visual": 0.37878787878787873,
+    "siglip_visual": 0.5757575757575757,
+    "clip_caption": 0.303030303030303,
+    "siglip_caption": 0.19696969696969696
+  },
+  "per_query": {
+    "sushi": {
+      "clip_visual": 1.0,
+      "siglip_visual": 1.0,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.3333333333333333
+    },
+    "pasta": {
+      "clip_visual": 0.3333333333333333,
+      "siglip_visual": 0.3333333333333333,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.0
+    },
+    "paella": {
+      "clip_visual": 1.0,
+      "siglip_visual": 1.0,
+      "clip_caption": 1.0,
+      "siglip_caption": 1.0
+    },
+    "cat": {
+      "clip_visual": 0.6666666666666666,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.0,
+      "siglip_caption": 0.3333333333333333
+    },
+    "sandwich": {
+      "clip_visual": 0.0,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.3333333333333333
+    },
+    "dessert": {
+      "clip_visual": 0.6666666666666666,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.0,
+      "siglip_caption": 0.3333333333333333
+    },
+    "soup": {
+      "clip_visual": 0.6666666666666666,
+      "siglip_visual": 0.3333333333333333,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.3333333333333333
+    },
+    "salad": {
+      "clip_visual": 0.0,
+      "siglip_visual": 0.3333333333333333,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.0
+    },
+    "noodles": {
+      "clip_visual": 0.3333333333333333,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.3333333333333333
+    },
+    "beer": {
+      "clip_visual": 0.3333333333333333,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.3333333333333333
+    },
+    "bibimbap": {
+      "clip_visual": 0.3333333333333333,
+      "siglip_visual": 0.3333333333333333,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.0
+    },
+    "takoyaki": {
+      "clip_visual": 0.3333333333333333,
+      "siglip_visual": 0.3333333333333333,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.0
+    },
+    "dumplings": {
+      "clip_visual": 0.0,
+      "siglip_visual": 1.0,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.0
+    },
+    "octopus": {
+      "clip_visual": 0.0,
+      "siglip_visual": 0.0,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.0
+    },
+    "ramen": {
+      "clip_visual": 0.6666666666666666,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.6666666666666666,
+      "siglip_caption": 0.3333333333333333
+    },
+    "curry": {
+      "clip_visual": 0.0,
+      "siglip_visual": 0.3333333333333333,
+      "clip_caption": 0.0,
+      "siglip_caption": 0.0
+    },
+    "chicken": {
+      "clip_visual": 0.3333333333333333,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.6666666666666666
+    },
+    "beef": {
+      "clip_visual": 0.0,
+      "siglip_visual": 0.3333333333333333,
+      "clip_caption": 0.0,
+      "siglip_caption": 0.0
+    },
+    "pork": {
+      "clip_visual": 0.3333333333333333,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.0,
+      "siglip_caption": 0.0
+    },
+    "ice cream": {
+      "clip_visual": 0.6666666666666666,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.3333333333333333,
+      "siglip_caption": 0.0
+    },
+    "tapas": {
+      "clip_visual": 0.6666666666666666,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.0,
+      "siglip_caption": 0.0
+    },
+    "kimchi": {
+      "clip_visual": 0.0,
+      "siglip_visual": 0.6666666666666666,
+      "clip_caption": 0.6666666666666666,
+      "siglip_caption": 0.0
+    }
+  }
+}
