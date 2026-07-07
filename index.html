@@ -160,7 +160,7 @@
     <div class="teaser">
       <figure>
         <img src="teaser.jpg.png" alt="Vista de interfaz Gradio / Teaser del proyecto" style="width: 100%; border-radius: 3px; border: 1px solid #e2e2e2; aspect-ratio: 16/8; object-fit: cover;">
-        <figcaption>The Critic answering a query over my personal food archive. Retrieval by image, by caption, and by a weighted fusion of both.</figcaption>
+        <figcaption>A sample from the corpus: dishes, meals, and memories that serve as the ground-truth for evaluating visual, textual, and hybrid search.</figcaption>
       </figure>
     </div>
   </div>
@@ -211,11 +211,11 @@
     </div>
     <div class="gallery" style="margin-top:26px;">
       <img src="corpus_sample_1.jpg" alt="Muestra de corpus 1" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
-      <img src="corpus_sample_2.jpg" alt="Muestra de corpus 2" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+      <img src="corpus_sample_2.jpg" alt="Muestra de corpus 2" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2; transform: rotate(90deg);">
       <img src="corpus_sample_3.jpg" alt="Muestra de corpus 3" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
       <img src="corpus_sample_4.jpg" alt="Muestra de corpus 4" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
       <img src="corpus_sample_5.jpg" alt="Muestra de corpus 5" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
-      <img src="corpus_sample_6.jpg" alt="Muestra de corpus 6" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+      <img src="corpus_sample_6.jpg" alt="Muestra de corpus 6" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2; transform: rotate(90deg);">
     </div>
     <figcaption>A representative sample of the corpus. The full set is available in the repository.</figcaption>
   </div>
@@ -424,7 +424,7 @@
       <div>
         <h4>Query: "octopus"</h4>
         <div style="padding-bottom: 10px;">
-            <img src="octopus.jpg" alt="Foto de Takoyaki" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2;">
+            <img src="octopus.jpg" alt="Foto de Takoyaki" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 3px; border: 1px solid #e2e2e2; transform: rotate(90deg);">
         </div>
         <p class="verdict win">caption 0.33 &nbsp;vs&nbsp; CLIP 0.00</p>
         <p style="font-size:16px;margin:0;">The mirror case. The visual route finds nothing: the one octopus image is takoyaki, where the octopus is hidden inside the batter and never visible. The caption route still retrieves it, because Gemma names the octopus in the description from culinary knowledge rather than from what the pixels show. Here language succeeds where vision cannot, precisely because the object is not visible.</p>
