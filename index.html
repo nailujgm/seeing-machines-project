@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seeing Machines &middot; A Multimodal Archive Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --ink:#1a1a1a;
+    --muted:#6b6b6b;
+    --faint:#8f8f8f;
+    --rule:#e2e2e2;
+    --rule-strong:#111111;
+    --accent:#3a4a7a;        /* one restrained slate-blue accent */
+    --card:#fafafa;
+    --maxw:760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Source Serif 4",Georgia,serif;
+    font-size:18px;line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--rule);}
+  a:hover{border-bottom-color:var(--accent);}
+  code{font-family:"Inter",monospace;font-size:.86em;background:var(--card);padding:1px 5px;border-radius:3px;}
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:96px 0 40px;}
+  .eyebrow{
+    font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--faint);margin:0 0 28px;
+  }
+  h1.title{
+    font-family:"Source Serif 4",serif;font-weight:600;
+    font-size:clamp(32px,5vw,46px);line-height:1.12;letter-spacing:-.01em;margin:0 0 14px;
+  }
+  h1.title .sub{
+    display:block;font-weight:400;font-style:italic;color:var(--muted);
+    font-size:clamp(18px,2.6vw,22px);line-height:1.35;margin-top:12px;
+  }
+  .tagline{color:var(--muted);font-size:19px;max-width:56ch;margin:22px 0 34px;}
+  .meta{
+    font-family:"Inter",sans-serif;font-size:13px;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:6px 28px;
+    padding:18px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  }
+  .meta b{color:var(--ink);font-weight:500;}
+
+  /* ---------- Teaser ---------- */
+  .teaser{margin:40px 0 0;}
+  .teaser figure{margin:0;}
+  .teaser .ph{aspect-ratio:16/8;}
+  figcaption{
+    font-family:"Inter",sans-serif;font-size:13px;color:var(--faint);
+    margin-top:10px;line-height:1.5;
+  }
+
+  /* ---------- Sections ---------- */
+  section{padding:52px 0;border-top:1px solid var(--rule);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin:0 0 20px;}
+  .sec-num{
+    font-family:"Inter",sans-serif;font-size:12px;font-weight:500;
+    color:var(--faint);letter-spacing:.05em;
+  }
+  h2{
+    font-family:"Source Serif 4",serif;font-weight:600;
+    font-size:clamp(22px,3.2vw,28px);line-height:1.2;margin:0;letter-spacing:-.01em;
+  }
+  h3{font-family:"Source Serif 4",serif;font-weight:600;font-size:19px;margin:30px 0 8px;}
+  h4{font-family:"Inter",sans-serif;font-size:14px;font-weight:600;margin:26px 0 8px;letter-spacing:-.01em;}
+  p{margin:0 0 16px;}
+  .lead{font-size:19.5px;color:#2a2a2a;}
+  .measure{max-width:66ch;}
+  .cols{display:grid;grid-template-columns:1fr;gap:0;}
+
+  /* ---------- Placeholders ---------- */
+  .ph{
+    background:var(--card);border:1px dashed #c9c9c9;border-radius:3px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    color:var(--faint);font-family:"Inter",sans-serif;font-size:12.5px;line-height:1.55;
+    padding:18px;min-height:130px;
+  }
+  .ph.tall{aspect-ratio:3/4;}
+  .ph.sq{aspect-ratio:1/1;}
+  .ph.wide{aspect-ratio:16/9;}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0;}
+  @media(max-width:600px){.gallery{grid-template-columns:repeat(2,1fr);}}
+
+  /* ---------- Versus (kept, but quiet) ---------- */
+  .versus{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:22px 0;
+  }
+  @media(max-width:600px){.versus{grid-template-columns:1fr;}}
+  .versus > div{padding:20px;}
+  .versus > div:first-child{border-right:1px solid var(--rule);}
+  @media(max-width:600px){.versus > div:first-child{border-right:none;border-bottom:1px solid var(--rule);}}
+  .versus h4{margin:0 0 6px;color:var(--muted);text-transform:uppercase;font-size:11.5px;letter-spacing:.07em;}
+  .versus .verdict{font-family:"Inter",sans-serif;font-size:15px;font-weight:600;margin:14px 0 6px;}
+  .versus .verdict.win{color:var(--accent);}
+
+  /* ---------- Tables ---------- */
+  .tablewrap{overflow-x:auto;margin:16px 0;}
+  table{border-collapse:collapse;width:100%;font-family:"Inter",sans-serif;font-size:14px;}
+  th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--rule);}
+  th:first-child,td:first-child{text-align:left;}
+  thead th{border-bottom:1px solid var(--rule-strong);color:var(--muted);font-weight:600;}
+  tr.best td{font-weight:600;color:var(--accent);}
+  caption{caption-side:bottom;font-family:"Inter",sans-serif;font-size:12px;color:var(--faint);text-align:left;padding-top:10px;}
+
+  /* ---------- Pipeline ---------- */
+  .pipe{width:100%;height:auto;margin:14px 0;border:1px solid var(--rule);border-radius:3px;background:var(--paper);}
+
+  /* ---------- Note ---------- */
+  .note{background:var(--card);border-left:2px solid var(--accent);padding:14px 18px;margin:20px 0;font-size:16.5px;color:#333;}
+  .note b{font-weight:600;}
+
+  /* ---------- Chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+  .chip{font-family:"Inter",sans-serif;font-size:12px;background:var(--card);border:1px solid var(--rule);padding:4px 10px;border-radius:3px;color:var(--muted);}
+
+  ul.tight{margin:0 0 16px;padding-left:22px;}
+  ul.tight li{margin:0 0 9px;}
+
+  footer{padding:48px 0 88px;border-top:1px solid var(--rule);}
+  .refs{font-family:"Inter",sans-serif;font-size:14px;color:var(--muted);padding-left:20px;}
+  .refs li{margin:0 0 7px;}
+  .backhome{font-family:"Inter",sans-serif;font-size:12.5px;color:var(--faint);margin-top:36px;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease;}
+    .reveal.in{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">CompSci 2 &middot; MA Design for Digital Futures &middot; TH Ohm &middot; SS 2026</p>
+    <h1 class="title">Seeing Machines
+      <span class="sub">a multimodal companion for an archive of food I miss</span>
+    </h1>
+    <p class="tagline">Building visual search from open, lightweight components to test what it can retrieve, and where it breaks, on an archive with known contents.</p>
+    <div class="meta">
+      <span><b>Author:</b> Julian Garcia Miralles</span>
+      <span><b>Level:</b> L3, The Critic</span>
+      <span><b>Corpus:</b> 56 food photographs, 2020 to 2026</span>
+      <span><b>Stack:</b> CLIP + Gemma 3 4B + Gradio</span>
+    </div>
+
+    <div class="teaser">
+      <figure>
+        <div class="ph wide">TEASER IMAGE<br>a wide, appetising shot of the Gradio interface returning
+          images for a query (e.g. "paella"), or a grid of your best corpus photos.<br>replace with: teaser.jpg</div>
+        <figcaption>The Critic answering a query over my personal food archive. Retrieval by image, by caption, and by a weighted fusion of both.</figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ABSTRACT -->
+<section id="abstract">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">00</span><h2>Abstract</h2></div>
+    <p class="lead measure">This project builds a text to image search over a personal corpus and studies where it succeeds and where it fails. The system compares three retrieval routes: matching a written query against image embeddings (CLIP), against machine written captions from a vision language model, and against a weighted fusion of the two. Evaluating on an archive whose contents are known lets every retrieval be judged correct or incorrect. The central finding is a pair of opposite failures, a cat the caption route cannot find and an octopus the visual route cannot find, that together show when each route wins and why fusing them raises precision. (Part of what drew me to the topic was plain curiosity about how the search box in a phone photo gallery might work under the hood.)</p>
+  </div>
+</section>
+
+<!-- MOTIVATION -->
+<section id="motivation">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Motivation</h2></div>
+    <div class="cols">
+      <div class="measure">
+        <p>Text to image retrieval, finding a picture from a written query, is now a common feature, but its behaviour is easy to take for granted and hard to inspect. This project builds such a system from open components and treats its mistakes as the object of study: not only what the pipeline retrieves well, but what it retrieves wrongly, and why. A personal curiosity about how the search box in a phone photo gallery might work was part of the initial pull, but the project is framed around the retrieval behaviour itself rather than around reverse engineering any product.</p>
+        <p>Answering that requires a corpus whose contents are fully known, so that each result can be checked without ambiguity. My own archive of food photographs, collected over about six years, serves that role: because I recognise every dish and setting, I can identify precisely when the system retrieves something incorrect. The personal collection is the test instrument, not the subject of the project.</p>
+      </div>
+      <div>
+        <div class="ph tall">PORTRAIT IMAGE<br>one evocative photo from the corpus<br>(a dish that means home to you)<br>replace with: motivation.jpg</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORPUS STATEMENT -->
+<section id="corpus">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Corpus statement</h2></div>
+    <div class="measure">
+      <p>The archive is a collection of <b>56 food photographs</b> gathered over roughly six years (2020 to 2026). It is a personal, slightly involuntary diary of longing for home laid out as data.</p>
+      <p>Most images were taken in Spain, with a few in Germany, where I live. They are dishes I photographed in restaurants and at home: mostly Spanish food, the meals I miss most while living abroad, mixed with food I have cooked myself, meals cooked by others, and photos that family and friends deliberately sent me to tease me. The cuisines vary more than the locations: alongside Spanish dishes there are meals from Asian restaurants (sushi, ramen, takoyaki, bibimbap, kimchi) that I photographed in Spain and Germany rather than abroad. So the corpus is geographically narrow but varied in the type of food it shows, and almost entirely food on tables.</p>
+      <div class="chips">
+        <span class="chip">paella</span><span class="chip">tapas</span><span class="chip">sushi</span>
+        <span class="chip">ramen</span><span class="chip">takoyaki</span><span class="chip">bibimbap</span>
+        <span class="chip">kimchi</span><span class="chip">dumplings</span><span class="chip">2 cats (outliers)</span>
+      </div>
+      <h3>Curation</h3>
+      <p>I chose these images for two reasons. First, variety: a spread of dishes, cuisines and settings rather than fifty plates of the same thing, so the retrieval system has something to distinguish. Second, I deliberately included two photographs of cats, the only non food content, to see how a system built and prompted around food would treat the exception. Those two images turned out to be among the most informative in the whole project.</p>
+      <h3>Rights</h3>
+      <p>All images are my own or were shared with me privately for personal use, and I have the right to publish them. There are no identifiable third parties in the set, so the full corpus can be shared publicly.</p>
+    </div>
+    <div class="gallery" style="margin-top:26px;">
+      <div class="ph sq">corpus sample 1</div>
+      <div class="ph sq">corpus sample 2</div>
+      <div class="ph sq">corpus sample 3</div>
+      <div class="ph sq">corpus sample 4</div>
+      <div class="ph sq">corpus sample 5</div>
+      <div class="ph sq">corpus sample 6</div>
+    </div>
+    <figcaption>A representative sample of the corpus. Replace each block with an image; the full set is available in the repository.</figcaption>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Approach</h2></div>
+    <p class="measure lead">The system offers three retrieval routes over one corpus, and an answering layer on top. Everything is cached to disk so the pipeline runs without re-running the GPU work.</p>
+    <p class="measure">The level was not fixed in advance. I started at L1 (visual search) and moved up to L2 and then L3 as time allowed, treating each level as a checkpoint that works on its own rather than aiming from the start at a single closed goal. Reaching L3 within the available time also left room for smaller experiments that grew out of questions raised while building the pipeline, such as comparing CLIP against a newer encoder (SigLIP2) to test whether the retrieval limits I observed were specific to CLIP or shared across this family of models.</p>
+
+    <svg style="width:0;height:0;position:absolute" aria-hidden="true">
+      <defs>
+        <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#1a1a1a"/>
+        </marker>
+      </defs>
+    </svg>
+    <style>
+      .rsvg{width:100%;height:auto;margin:10px 0 4px;border:1px solid var(--rule);border-radius:3px;background:var(--paper);}
+      .rsvg .b{fill:#fafafa;stroke:#1a1a1a;stroke-width:1.3;}
+      .rsvg .b2{fill:#ffffff;stroke:#1a1a1a;stroke-width:1.3;}
+      .rsvg .acc{fill:#eef1f8;stroke:#3a4a7a;stroke-width:1.3;}
+      .rsvg .t{font-family:'Inter',sans-serif;font-size:13px;fill:#1a1a1a;}
+      .rsvg .tt{font-family:'Inter',sans-serif;font-size:11px;fill:#6b6b6b;}
+      .rsvg .ar{stroke:#1a1a1a;stroke-width:1.3;fill:none;marker-end:url(#a);}
+    </style>
+
+    <h3>L1, The Finder: visual route</h3>
+    <p class="measure">The query is embedded by CLIP's text encoder and matched, by cosine similarity, directly against the image embeddings. No captions, no generation.</p>
+    <svg class="rsvg" viewBox="0 0 760 130" role="img" aria-label="L1 visual route">
+      <rect class="b" x="20" y="45" width="130" height="46" rx="3"/>
+      <text class="t" x="85" y="66" text-anchor="middle">text query</text>
+      <text class="tt" x="85" y="82" text-anchor="middle">e.g. "cat"</text>
+      <rect class="b2" x="230" y="45" width="150" height="46" rx="3"/>
+      <text class="t" x="305" y="66" text-anchor="middle">CLIP image</text>
+      <text class="tt" x="305" y="82" text-anchor="middle">visual embeddings</text>
+      <rect class="b" x="460" y="45" width="150" height="46" rx="3"/>
+      <text class="t" x="535" y="66" text-anchor="middle">cosine similarity</text>
+      <text class="tt" x="535" y="82" text-anchor="middle">rank the images</text>
+      <rect class="b" x="655" y="45" width="85" height="46" rx="3"/>
+      <text class="t" x="697" y="72" text-anchor="middle">top-k</text>
+      <path class="ar" d="M150,68 L228,68"/>
+      <path class="ar" d="M380,68 L458,68"/>
+      <path class="ar" d="M610,68 L653,68"/>
+    </svg>
+
+    <h3>L2, The Companion: caption route</h3>
+    <p class="measure">Each image is described once by Gemma; those captions are embedded by CLIP's text encoder. The query is matched against the caption embeddings, and Gemma then answers grounded only in the retrieved captions.</p>
+    <svg class="rsvg" viewBox="0 0 760 210" role="img" aria-label="L2 caption route">
+      <rect class="acc" x="20" y="20" width="150" height="46" rx="3"/>
+      <text class="t" x="95" y="41" text-anchor="middle">Gemma 3 4B</text>
+      <text class="tt" x="95" y="57" text-anchor="middle">structured captions</text>
+      <rect class="b2" x="240" y="20" width="160" height="46" rx="3"/>
+      <text class="t" x="320" y="41" text-anchor="middle">CLIP text</text>
+      <text class="tt" x="320" y="57" text-anchor="middle">caption embeddings</text>
+      <rect class="b" x="20" y="140" width="150" height="46" rx="3"/>
+      <text class="t" x="95" y="161" text-anchor="middle">text query</text>
+      <text class="tt" x="95" y="177" text-anchor="middle">e.g. "sushi"</text>
+      <rect class="b" x="240" y="140" width="160" height="46" rx="3"/>
+      <text class="t" x="320" y="161" text-anchor="middle">cosine similarity</text>
+      <text class="tt" x="320" y="177" text-anchor="middle">rank via captions</text>
+      <rect class="acc" x="470" y="140" width="150" height="46" rx="3"/>
+      <text class="t" x="545" y="161" text-anchor="middle">Gemma answer</text>
+      <text class="tt" x="545" y="177" text-anchor="middle">grounded in captions</text>
+      <rect class="b" x="655" y="140" width="85" height="46" rx="3"/>
+      <text class="t" x="697" y="167" text-anchor="middle">answer</text>
+      <path class="ar" d="M170,43 L238,43"/>
+      <path class="ar" d="M320,66 L320,138"/>
+      <path class="ar" d="M170,163 L238,163"/>
+      <path class="ar" d="M400,163 L468,163"/>
+      <path class="ar" d="M620,163 L653,163"/>
+    </svg>
+
+    <h3>L3, The Critic: hybrid route</h3>
+    <p class="measure">Both similarity scores (visual and caption) are min-max normalised and fused as alpha times visual plus (1 minus alpha) times caption, with alpha = 0.7. The retrieved images themselves, capped at four, are then passed as pixels into Gemma's context for a multimodal answer.</p>
+    <svg class="rsvg" viewBox="0 0 760 210" role="img" aria-label="L3 hybrid route">
+      <rect class="b" x="20" y="80" width="130" height="46" rx="3"/>
+      <text class="t" x="85" y="101" text-anchor="middle">text query</text>
+      <text class="tt" x="85" y="117" text-anchor="middle">e.g. "cat"</text>
+      <rect class="b2" x="210" y="20" width="150" height="46" rx="3"/>
+      <text class="t" x="285" y="41" text-anchor="middle">visual sim.</text>
+      <text class="tt" x="285" y="57" text-anchor="middle">CLIP images</text>
+      <rect class="b2" x="210" y="140" width="150" height="46" rx="3"/>
+      <text class="t" x="285" y="161" text-anchor="middle">caption sim.</text>
+      <text class="tt" x="285" y="177" text-anchor="middle">CLIP captions</text>
+      <rect class="acc" x="410" y="80" width="140" height="46" rx="3"/>
+      <text class="t" x="480" y="101" text-anchor="middle">hybrid fusion</text>
+      <text class="tt" x="480" y="117" text-anchor="middle">alpha = 0.7</text>
+      <rect class="b" x="590" y="20" width="150" height="46" rx="3"/>
+      <text class="t" x="665" y="41" text-anchor="middle">top-k images</text>
+      <text class="tt" x="665" y="57" text-anchor="middle">max 4, as pixels</text>
+      <rect class="acc" x="590" y="140" width="150" height="46" rx="3"/>
+      <text class="t" x="665" y="161" text-anchor="middle">Gemma</text>
+      <text class="tt" x="665" y="177" text-anchor="middle">multimodal answer</text>
+      <path class="ar" d="M150,95 C180,95 180,45 208,45"/>
+      <path class="ar" d="M150,111 C180,111 180,160 208,160"/>
+      <path class="ar" d="M360,45 C385,45 385,95 408,98"/>
+      <path class="ar" d="M360,160 C385,160 385,112 408,108"/>
+      <path class="ar" d="M550,98 C570,95 570,55 588,48"/>
+      <path class="ar" d="M665,66 L665,138"/>
+    </svg>
+    <figcaption>The three routes, shown separately. L1 searches image embeddings directly; L2 searches Gemma captions and answers from them; L3 fuses both scores and passes the retrieved pixels into the VLM.</figcaption>
+
+    <div class="cols" style="margin-top:26px;">
+      <div class="measure">
+        <h3>The caption schema (the L2 design decision)</h3>
+        <p>The caption schema matters because the captions, not the pixels, are what the caption route searches. Each image is described by Gemma into a fixed six field template and cached to JSON. During development the captions were regenerated several times while testing different ways of describing the images (see the process section); once a format was settled, they are read from the cache rather than regenerated on every run. Every field has a retrieval purpose:</p>
+        <ul class="tight">
+          <li><b>Ranked keyword line, first.</b> CLIP encodes only the first 77 tokens of any text and truncates the rest, so the words that distinguish one dish from another must appear at the very start. Ordering the keywords by visual dominance puts the subject ahead of the background inside that token budget.</li>
+          <li><b>Short summary.</b> A dense natural language sentence gives CLIP semantic context that isolated keywords lack, without spending many tokens.</li>
+          <li><b>Confirmed objects with subtypes.</b> A hierarchy such as "Beverage &gt; Soda &gt; Cola" lets the same entry match both broad and specific queries, improving recall without losing precision.</li>
+          <li><b>Probable elements with confidence scores.</b> Marking uncertain content explicitly, rather than asserting it, is what later made the model's hallucinations visible and auditable in the dossier.</li>
+          <li><b>OCR text.</b> Transcribed text makes writing inside an image searchable (menus, labels, packaging).</li>
+          <li><b>Attributes (colour, material, texture).</b> Supports queries about appearance rather than identity.</li>
+        </ul>
+        <p>The vocabulary is deliberately concrete and English, because CLIP is English trained; Spanish terms retrieve worse than their English equivalents.</p>
+      </div>
+      <div class="measure">
+        <h3>Hybrid fusion and multimodal answering (L3)</h3>
+        <p>The two similarity vectors are min max normalised and combined as <code>alpha &middot; visual + (1 - alpha) &middot; caption</code>. Normalisation matters: the raw visual and caption similarities occupy different ranges, so without it one route would dominate the sum for reasons of scale rather than relevance. The weight is exposed as a slider and defaults to the empirically best value found by the sweep below. When the Critic answers a question, the retrieved images themselves (capped at four) are passed into Gemma's context rather than answering from captions alone.</p>
+        <h3>Generation parameters</h3>
+        <p>Answer generation runs with greedy decoding (<code>do_sample=False</code>, no temperature or top_p sampling). This is a deliberate choice: for a retrieval and evaluation project, deterministic output makes results reproducible across runs, at the cost of the lexical variety that sampling would add. Sampling parameters would matter more for open ended generation than for grounded answers over a fixed corpus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS / EVALUATION -->
+<section id="results">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Results: precision@3 across three routes</h2></div>
+    <p class="measure">I built a gold standard of 22 queries, each mapped by hand to the images in the corpus that correctly answer it, and measured precision@3 for CLIP only, caption only and hybrid retrieval.</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>Mean precision@3 over 22 gold queries. Many queries have only one or two correct images, so their ceiling is 0.33 or 0.67; the means should be read against that.</caption>
+        <thead><tr><th>Route</th><th>Mean precision@3</th></tr></thead>
+        <tbody>
+          <tr><td>CLIP only (visual)</td><td>0.38</td></tr>
+          <tr><td>Caption only</td><td>0.30</td></tr>
+          <tr class="best"><td>Hybrid (alpha = 0.7)</td><td>0.45</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="measure">The hybrid route beats both pure routes. The visual route is stronger than the caption route on this very visual corpus, but the caption route rescues specific cases the visual route misses, and the fusion recovers the best of each.</p>
+
+    <h3>Tuning the fusion weight</h3>
+    <p class="measure">Sweeping alpha from 0 (captions only) to 1 (visual only) produces a clear peak: the hybrid mean rises to <b>0.45 at alpha = 0.7</b> and falls off on either side. The curve reducing exactly to the pure routes at the extremes also confirms the fusion is implemented correctly.</p>
+    <p class="measure">The chosen weight does more than lift the average. On the "cat" query, an equal blend (alpha = 0.5) scores only 0.33, because the noisy caption route drags the strong visual result down; at alpha = 0.7 the hybrid recovers to 0.67, matching the visual route. So leaning the fusion toward vision does not just help globally, it specifically rescues the hardest case for the caption route.</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>Hybrid mean precision@3 as a function of alpha. CLIP (0.38) and caption (0.30) are constant because they do not depend on alpha.</caption>
+        <thead><tr><th>alpha</th><th>0.0</th><th>0.2</th><th>0.3</th><th>0.5</th><th>0.6</th><th>0.7</th><th>0.8</th><th>0.9</th><th>1.0</th></tr></thead>
+        <tbody>
+          <tr class="best"><td>hybrid</td><td>0.33</td><td>0.39</td><td>0.42</td><td>0.42</td><td>0.44</td><td>0.47</td><td>0.45</td><td>0.41</td><td>0.39</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ph wide" style="margin-top:8px;">OPTIONAL CHART<br>a line plot of hybrid precision@3 vs alpha (peak at 0.7)<br>replace with: alpha_sweep.png, or delete this block</div>
+
+    <h3>Model comparison: CLIP vs SigLIP2</h3>
+    <p class="measure">A follow-up experiment, driven by the crowded-embedding finding below, swaps the encoder for a newer one, <code>google/siglip2-base-patch16-224</code> (2025), and re-scores both retrieval routes on the same gold set. The result is not a clean win but a trade-off: SigLIP2 is a much stronger image encoder, yet a weaker text encoder for these long captions.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Mean precision@3 over 22 gold queries. SigLIP2 improves the visual route by nearly half, but its 64 token text limit (smaller than CLIP's 77) makes it worse on the long captions.</caption>
+        <thead><tr><th>Model</th><th>Visual route</th><th>Caption route</th></tr></thead>
+        <tbody>
+          <tr><td>CLIP (2021)</td><td>0.394</td><td>0.333</td></tr>
+          <tr class="best"><td>SigLIP2 (2025)</td><td>0.576</td><td>0.212</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure">Two things follow. First, the visual gap (0.576 vs 0.394) shows how much a newer encoder improves image side retrieval on this corpus. Second, and more revealing, SigLIP2 does <i>not</i> fix the caption route; it makes it worse. That supports the diagnosis that the caption route's weakness is not specific to CLIP but structural to this family: a short text budget over a homogeneous corpus crowds the descriptions together regardless of which encoder reads them. For that reason the shipped system keeps CLIP for a coherent single model pipeline, and treats the swap as a measured comparison rather than a drop in replacement.</p>
+    <div class="ph wide" style="margin-top:8px;">CHART<br>grouped bar chart, CLIP vs SigLIP2 across the two routes<br>replace with: model_comparison.png (generated by the notebook)</div>
+  </div>
+</section>
+
+<!-- MIS-SEEING DOSSIER -->
+<section id="misseeing">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Mis-seeing dossier</h2></div>
+    <p class="measure lead">The most interesting results are the failures. Six are documented here; each is diagnosed to the exact stage of the pipeline where it breaks, because the point is not that the system errs but why.</p>
+
+    <h3>Two opposite failures: the cat and the octopus</h3>
+    <p class="measure">The clearest finding of the project is a symmetric pair. For one query the visual route wins completely; for the other, the caption route does. Together they show when joint embedding retrieval beats caption mediated retrieval and when it is the other way around.</p>
+
+    <div class="versus">
+      <div>
+        <h4>Query: "cat"</h4>
+        <div class="ph sq" style="min-height:200px;">image: the cat on the television<br>replace with: cat_tv.jpg</div>
+        <p class="verdict win">CLIP 0.67 &nbsp;vs&nbsp; caption 0.00</p>
+        <p style="font-size:16px;margin:0;">The caption route retrieves neither cat, even though Gemma clearly saw one: its caption opens "Cat, Television, Wall, Interior". The visual route finds both cats easily.</p>
+      </div>
+      <div>
+        <h4>Query: "octopus"</h4>
+        <div class="ph sq" style="min-height:200px;">image: takoyaki (octopus is inside the batter, not visible)<br>replace with: octopus.jpg</div>
+        <p class="verdict win">caption 0.33 &nbsp;vs&nbsp; CLIP 0.00</p>
+        <p style="font-size:16px;margin:0;">The mirror case. The visual route finds nothing: the one octopus image is takoyaki, where the octopus is hidden inside the batter and never visible. The caption route still retrieves it, because Gemma names the octopus in the description from culinary knowledge rather than from what the pixels show. Here language succeeds where vision cannot, precisely because the object is not visible.</p>
+      </div>
+    </div>
+
+    <h4 style="font-size:16px;">Why the caption route cannot find the cats: a crowded embedding space</h4>
+    <p class="measure">The obvious explanation, that the busy caption of the cat on the television ("Cat, Television, Wall, Interior") dilutes the subject, is only part of the story. I tested the second cat photo, a kitten whose caption is completely cat dominant ("Kitten, Cat, Cute, Tabby, Domestic cat"), and searched the caption route for the bare word "cat". The kitten still ranked only 21st, with similarity 0.412, below food photos with no cat at all scoring around 0.50 to 0.53.</p>
+    <p class="measure">So the cause is deeper than dilution. In a corpus that is almost entirely food photographed on tables, the caption embeddings are crowded into a very narrow region of the space: nearly every description shares vocabulary like plate, dish, table, natural lighting, textures. The whole similarity range for a query collapses into a thin band (roughly 0.41 to 0.53 here), so the signal "this is a cat" cannot rise above the background hum of "this is a photo of food". CLIP's text encoder does not separate cat from food strongly enough in this domain. The image encoder does, which is why the visual route finds the cats. This is the mechanistic reason the caption route scored lowest overall, and it motivates the model comparison experiment: the question is whether a newer encoder spreads a homogeneous corpus more, or whether this crowding is a shared limit of the family.</p>
+
+    <h3>The system responds to descriptive terms, not to questions</h3>
+    <p class="measure">A related, practical failure surfaced when I asked the L2 interface a natural language question, <i>"Can you see more than one cat?"</i>, at top_k = 3. The route embeds the whole sentence and matches it against the captions, but the embedding of a question is dominated by its interrogative form, not by the word "cat"; combined with the crowding above, no cat entered the top three, so the model answered, correctly for what it was given, that there were no cats. This is a genuine usability limit: an embedding search responds to descriptive terms ("cat", "seafood paella"), not to questions about the images, the same way a phone gallery expects "dog" rather than "how many dogs are here".</p>
+
+    <h3>Counting and grounding failure in the multimodal answer</h3>
+    <p class="measure">A distinct failure appears in the L3 answering mode, where the retrieved images themselves are passed into Gemma's context. Asked <i>"Do you see more than one cat in the images?"</i>, the Critic returned a single cat image, stated there was only one cat, and described the other two retrieved images as food. Two things broke at once: a counting error (it undercounted the cats it was shown) and a grounding error (it narrated food that was not the answer to the question). This is not a retrieval problem; the images were in front of it. It is a known behaviour of small vision language models when several images share the context window, where each image competes for a limited token budget and attention.</p>
+
+    <h3>Confabulation driven by the question</h3>
+    <p class="measure">The multimodal mode produces a second, distinct failure. Asked <i>"Show me cats"</i> in L3 with alpha = 0.7, the hybrid route correctly retrieved both cats, and the answer began accurately: "The first image shows a kitten. The second image shows a cat." Then it added a third sentence: "The third image shows a bowl of ramen with a cat sitting in it." The third retrieved image was indeed a bowl of ramen, but there was no cat in it. The model invented one. Where the counting failure was an <i>undercount</i>, this is the opposite: the query "show me cats" primed the model to confirm its premise, so it projected a cat onto a food image that had none. It is a grounding failure biased by the prompt, the small VLM completing the expected pattern rather than reporting what the pixels contain. A confident, fluent answer can be partly accurate and partly fabricated within the same few sentences.</p>
+
+    <p class="measure">Queried for concepts the corpus does not contain ("a person smiling", "handwritten text"), the caption route returns food anyway, with moderate similarity around 0.47 to 0.50, well below the 0.63 of a true match like sushi. The mechanism is simple: cosine similarity always has a nearest neighbour. Retrieval never returns "nothing"; it returns the least distant point, and in an archive that is almost entirely food, the least distant point is always food. The system has no built in notion of "this query has no answer here". A production search would need a similarity threshold below which it reports an empty result, which this pipeline does not add, so the failure stays visible.</p>
+
+    <h3>The gold set itself exposed mis-seeing</h3>
+    <p class="measure">I first drafted the gold set by searching for keywords in Gemma's captions, then verified every entry against the images using my own written descriptions of the corpus. Several assignments were wrong: a duck dish that Gemma's keywords let slip into "chicken", a drink labelled as beer that was actually mango juice, and a "seafood" dish holding cuttlefish rather than octopus. Gemma mentions ingredients that are not the subject, so keyword presence in a caption is not the same as the object being the subject, or even being present. Correcting these by hand is another face of the same phenomenon, and it is why the final gold set is verified against the images rather than derived from the captions.</p>
+  </div>
+</section>
+
+<!-- PROCESS / DEAD ENDS -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Process and dead ends</h2></div>
+    <div class="measure">
+      <p>The caption route did not work at first, and fixing it happened in three honest stages.</p>
+      <h3>Stage 1: broken embeddings</h3>
+      <p>Every Gemma caption opened with the same preamble ("Okay, here is a detailed analysis..."). Because CLIP truncates text at 77 tokens, it was encoding mostly that shared boilerplate, so all caption vectors clustered together and a single image was returned for almost every query.</p>
+      <h3>Stage 2: filter the caption before embedding</h3>
+      <p>I extracted only the informative part of each caption (the keyword line and summary) before embedding. Similarities immediately spread out and became query dependent.</p>
+      <h3>Stage 3: change the prompt</h3>
+      <p>I rewrote the caption prompt so Gemma starts directly with a ranked keyword line and writes no preamble, then re-captioned. This put the discriminative content inside CLIP's first 77 tokens by design. The fix is measurable in the shipped captions: all 56 cached descriptions now begin with the keyword line and none with the discarded "Okay, here is the analysis" preamble that broke the first version.</p>
+      <div class="note"><b>A technical bug worth noting.</b> An early version loaded Gemma with the text only auto class, and later a transformers version returned a model output object instead of a tensor from CLIP. Both produced failures that looked like model problems but were integration bugs. Diagnosing which stage of the pipeline actually breaks, rather than blaming "the model", was a recurring theme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIMITATIONS -->
+<section id="limitations">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Limitations</h2></div>
+    <ul class="tight measure">
+      <li>The corpus is small (56 images) and thematically narrow (food), so absolute precision numbers should be read as relative comparisons between routes, not as general benchmarks.</li>
+      <li>Many gold queries have only one or two correct images, capping their precision@3 at 0.33 or 0.67 and pulling the means down mechanically.</li>
+      <li>CLIP is English trained: queries in Spanish ("gato") perform worse than their English equivalents ("cat"). Retrieval quality depends on query language.</li>
+      <li>The caption route inherits Gemma's mistakes. Ingredients mentioned in passing become false positives, and a diluted subject becomes a false negative.</li>
+      <li>Answer generation in L2 and L3 needs a GPU. Retrieval works on CPU, but the chat answers do not.</li>
+      <li>A single fixed fusion weight is not optimal for every query. Cases that are purely visual or purely textual would prefer a different alpha than the global best.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Reflection</h2></div>
+    <p class="measure">The initial question, whether a photo library search can be assembled from open, lightweight components, has a qualified answer: yes for retrieval, with clear and diagnosable limits. The system finds what exists in the corpus reasonably well, and the hybrid route beats either single route. The value of using an archive with known contents was that it turned each failure into a specific, traceable claim rather than a vague sense that the model "sometimes gets it wrong". The most useful results were the failures, and in every case the interesting part was locating the exact stage where the pipeline breaks: the averaged text vector, the 77 token limit, the nearest neighbour that is always food, the multimodal context that cannot count. These are the same failure modes a commercial photo search must handle behind a clean interface; building the pipeline exposed them instead of hiding them. A next version would let each query choose its own fusion weight, add a similarity threshold so the system can report an empty result, and split the caption into a separate subject field to counter the dilution effect.</p>
+  </div>
+</section>
+
+<!-- AI STATEMENT -->
+<section id="ai-statement">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">09</span><h2>AI use statement</h2></div>
+    <div class="measure">
+      <p>In the interest of transparency: I used an AI assistant (Claude) throughout this project, including to generate code. The pipeline was written by the assistant following my directions and the project brief: I set the goals, the level (L3), the design constraints and the corpus, and I directed the work, reviewed it, ran it and iterated on it. The assistant also helped trace and fix real bugs (a vision language model loaded with the wrong model class, a CLIP call returning a wrapper object instead of a tensor, an interface hanging on a blocking input prompt), refactor the notebook into a cache aware structure, verify my gold set against the images, and draft and edit the text of this documentation page.</p>
+      <p>The direction of the project is mine: the research question, the choice and curation of the corpus, the design decisions, the diagnoses of each failure, and the interpretation of the results. The assistant accelerated implementation and writing under my supervision rather than replacing the analysis. All results reported here were produced by running the pipeline on my own corpus and verified by me.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">10</span><h2>Sources and references</h2></div>
+    <ul class="refs">
+      <li>Radford et al., <i>Learning Transferable Visual Models from Natural Language Supervision</i> (CLIP), 2021.</li>
+      <li>Gemma Team, Google DeepMind, <i>Gemma 3</i> technical report, 2025.</li>
+      <li>Course materials, CompSci 2, MA Design for Digital Futures, TH Ohm (Technische Hochschule Nürnberg Georg Simon Ohm), SS 2026.</li>
+      <li>Project page format reference: dreambooth.github.io.</li>
+      <li>Student project reference: ricardomehl.github.io/publication/LatentWorld_Documentation.</li>
+    </ul>
+    <p class="backhome">Seeing Machines &middot; Julian Garcia Miralles &middot; L3, The Critic &middot; TH Ohm SS 2026</p>
+  </div>
+</footer>
+
+<script>
+  // Gentle scroll reveal, disabled when the user prefers reduced motion.
+  const mq = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  if (mq.matches){
+    document.querySelectorAll('section, .teaser').forEach(el=>el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }
+</script>
+</body>
+</html>
