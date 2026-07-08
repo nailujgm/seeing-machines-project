@@ -155,6 +155,19 @@
     .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease;}
     .reveal.in{opacity:1;transform:none;}
   }
+
+  /* ---------- Print / PDF export ----------
+     The carousel below (.g-slide) hides every query but the active one via
+     display:none, and .reveal starts at opacity:0 until scrolled into view.
+     Both are fine for the live site but silently drop content in a
+     print-to-PDF export. Force everything visible when printing so the
+     archived PDF matches the live page (all six queries per level, not just
+     the first one). */
+  @media print{
+    .reveal{opacity:1 !important;transform:none !important;}
+    .g-slide{display:block !important;margin-bottom:16px;page-break-inside:avoid;}
+    .g-nav{display:none !important;}
+  }
 </style>
 </head>
 <body>
@@ -171,6 +184,7 @@
       <span><b>Level:</b> L3, The Critic</span>
       <span><b>Corpus:</b> 56 food photographs, 2020 to 2026</span>
       <span><b>Stack:</b> CLIP + Gemma 3 4B + Gradio</span>
+      <span><b>Code:</b> <a href="https://github.com/nailujgm/seeing-machines-project" target="_blank" rel="noopener">repository</a> (notebook + cached embeddings/captions)</span>
     </div>
 
     <div class="teaser">
@@ -503,7 +517,7 @@ function gNav(id, dir){
         </tbody>
       </table>
     </div>
-    <p class="measure">Across the full 22-query gold set the fix is a real, if partial, win: caption-only mean precision@3 rose from 0.30 to 0.35, and the hybrid mean rose from 0.45 to 0.48 at the same alpha. It is not a uniform win, though, and the exceptions are informative. Several dish-name queries got worse after the switch: <code>soup</code> fell from 0.33 to 0.00, <code>salad</code> from 0.33 to 0.00, <code>ramen</code> from 0.67 to 0.33, <code>octopus</code> from 0.33 to 0.00. The mechanism is the mirror image of the fix itself: Gemma's OBJECTS field tends to write structured category labels ("Food &gt; Noodles, Yellow") rather than the plain dish name, while the plain word often only appears in the keyword line or the summary. Preferring OBJECTS trades some recall on plainly named dishes for a large gain on a genuinely distinctive object that OBJECTS names explicitly and KEYWORDS buried among nine other terms.</p>
+    <p class="measure">Across the full 22-query gold set the fix is a real, if partial, win: caption-only mean precision@3 rose from 0.30 to 0.35, and the hybrid mean rose from 0.47 to 0.48 at the same alpha. It is not a uniform win, though, and the exceptions are informative. Several dish-name queries got worse after the switch: <code>soup</code> fell from 0.33 to 0.00, <code>salad</code> from 0.33 to 0.00, <code>ramen</code> from 0.67 to 0.33, <code>octopus</code> from 0.33 to 0.00. The mechanism is the mirror image of the fix itself: Gemma's OBJECTS field tends to write structured category labels ("Food &gt; Noodles, Yellow") rather than the plain dish name, while the plain word often only appears in the keyword line or the summary. Preferring OBJECTS trades some recall on plainly named dishes for a large gain on a genuinely distinctive object that OBJECTS names explicitly and KEYWORDS buried among nine other terms.</p>
     <p class="measure">The fix is also not complete for its own target case. The kitten photo improved by roughly 20 ranks on every phrasing tested, but only lands inside the top 3 for "cats"; for "cat" and "gatos" it sits just outside, at rank 4 and rank 5. My theory for the residual gap: removing the scene-level dilution (television, wall, lighting) does not remove the underlying crowding, it only moves it one level down. The corpus is still almost entirely food, so OBJECTS-field embeddings for food dishes still occasionally score close to, or just above, the kitten's OBJECTS embedding for a generic query like "cat" &mdash; a weaker, second-order version of the same crowded-embedding-space phenomenon, now compressed within the OBJECTS vocabulary instead of across the whole caption. A caption route built on a genuinely small, structured field is less crowded than one built on free text, but "less crowded" is not the same as "uncrowded", and a corpus this homogeneous keeps pushing back against either.</p>
 
     <h3>The system responds to descriptive terms, not to questions</h3>
